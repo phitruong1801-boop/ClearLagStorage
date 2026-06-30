@@ -110,14 +110,15 @@ public class ClearLagCommand implements CommandExecutor, TabCompleter {
         }
         plugin.getConfigManager().reload();
         plugin.getClearTask().restart();
+        plugin.getMergeTask().restart(); // ✅ Tải lại cả task gộp item
         sender.sendMessage(plugin.getConfigManager().getMessage("reloaded"));
     }
 
     private void sendUsage(CommandSender sender) {
         sender.sendMessage("§7/clearlag now §f- Dọn item rơi ngay (admin)");
-        sender.sendMessage("§7/clearlag storage [player] §f- Mở kho item đã bị dọn");
+        sender.sendMessage("§7/clearlag storage [player] §f- Mở kho item đã dọn");
         sender.sendMessage("§7/clearlag unclaimed §f- Mở kho item không rõ chủ (admin)");
-        sender.sendMessage("§7/clearlag reload §f- Tải lại config.yml (admin)");
+        sender.sendMessage("§7/clearlag reload §f- Tải lại config + khởi động lại task (admin)");
     }
 
     @Override
@@ -135,4 +136,4 @@ public class ClearLagCommand implements CommandExecutor, TabCompleter {
         }
         return options;
     }
-              }
+}
