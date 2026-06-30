@@ -1,0 +1,24 @@
+name: ClearLagStorage
+version: '1.0.0'
+main: com.example.clearlagstorage.ClearLagStorage
+api-version: '1.21'
+author: YourName
+description: ClearLag dọn item rơi để giảm lag, nhưng lưu lại vào kho có thể xem và lấy lại.
+
+commands:
+  clearlag:
+    description: Quản lý ClearLagStorage
+    usage: |
+      /clearlag now - Dọn item rơi ngay
+      /clearlag storage [player] - Mở kho item đã bị dọn
+      /clearlag unclaimed - Mở kho item không rõ chủ (admin)
+      /clearlag reload - Tải lại config.yml
+    aliases: [cls, cl]
+
+permissions:
+  clearlagstorage.use:
+    description: Cho phép dùng /clearlag storage để xem kho của bản thân
+    default: true
+  clearlagstorage.admin:
+    description: Cho phép dọn item ngay, xem kho của người khác, kho unclaimed, reload config
+    default: op
