@@ -21,7 +21,7 @@ public class ConfigManager {
         this.config = plugin.getConfig();
     }
 
-    // --- Clear Task ---
+    // Clear Task
     public boolean isClearTaskEnabled() {
         return config.getBoolean("clear-task.enabled", true);
     }
@@ -38,7 +38,7 @@ public class ConfigManager {
         return config.getBoolean("clear-task.ignore-custom-named-items", false);
     }
 
-    // --- Merge Task (MỚI) ---
+    // Merge Task
     public boolean isMergeEnabled() {
         return config.getBoolean("merge-task.enabled", true);
     }
@@ -49,7 +49,7 @@ public class ConfigManager {
         return config.getDouble("merge-task.radius", 2.5);
     }
 
-    // --- Storage ---
+    // Storage
     public int getMaxStacksPerPlayer() {
         return config.getInt("storage.max-stacks-per-player", 200);
     }
@@ -60,7 +60,7 @@ public class ConfigManager {
         return config.getInt("storage.auto-purge-days", 7);
     }
 
-    // --- Messages ---
+    // Messages
     public String getMessage(String path) {
         String prefix = config.getString("messages.prefix", "");
         String raw = config.getString("messages." + path, "");
