@@ -5,11 +5,10 @@ import com.example.clearlagstorage.config.ConfigManager;
 import com.example.clearlagstorage.gui.StorageGuiListener;
 import com.example.clearlagstorage.storage.ItemStorageManager;
 import com.example.clearlagstorage.task.ClearTask;
-import com.example.clearlagstorage.task.MergeTask; // ✅ Đúng import MergeTask
+import com.example.clearlagstorage.task.MergeTask;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class ClearLagStorage extends JavaPlugin {
-
     private ConfigManager configManager;
     private ItemStorageManager storageManager;
     private ClearTask clearTask;
@@ -34,7 +33,7 @@ public final class ClearLagStorage extends JavaPlugin {
         this.mergeTask = new MergeTask(this);
         this.mergeTask.start();
 
-        getLogger().info("✅ ClearLagStorage đã bật: Gộp item + Lưu item an toàn!");
+        getLogger().info("✅ ClearLagStorage: Đã bật Gộp Item + Lưu Trữ!");
     }
 
     @Override
@@ -42,7 +41,7 @@ public final class ClearLagStorage extends JavaPlugin {
         if (clearTask != null) clearTask.stop();
         if (mergeTask != null) mergeTask.stop();
         if (storageManager != null) storageManager.saveAll();
-        getLogger().info("🛑 ClearLagStorage đã tắt, dữ liệu đã lưu.");
+        getLogger().info("🛑 ClearLagStorage: Đã tắt & lưu dữ liệu.");
     }
 
     public ConfigManager getConfigManager() { return configManager; }
