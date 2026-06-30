@@ -5,7 +5,7 @@ import com.example.clearlagstorage.config.ConfigManager;
 import com.example.clearlagstorage.gui.StorageGuiListener;
 import com.example.clearlagstorage.storage.ItemStorageManager;
 import com.example.clearlagstorage.task.ClearTask;
-import com.example.clearlagstorage.task.MergeTask;
+import com.example.clearlagstorage.task.MergeTask; // ✅ Đúng import MergeTask
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class ClearLagStorage extends JavaPlugin {
@@ -13,7 +13,7 @@ public final class ClearLagStorage extends JavaPlugin {
     private ConfigManager configManager;
     private ItemStorageManager storageManager;
     private ClearTask clearTask;
-    private MergeTask mergeTask; // Thêm task gộp item
+    private MergeTask mergeTask;
 
     @Override
     public void onEnable() {
@@ -31,7 +31,7 @@ public final class ClearLagStorage extends JavaPlugin {
         this.clearTask = new ClearTask(this);
         this.clearTask.start();
 
-        this.mergeTask = new MergeTask(this); // Khởi tạo task gộp
+        this.mergeTask = new MergeTask(this);
         this.mergeTask.start();
 
         getLogger().info("✅ ClearLagStorage đã bật: Gộp item + Lưu item an toàn!");
@@ -40,14 +40,13 @@ public final class ClearLagStorage extends JavaPlugin {
     @Override
     public void onDisable() {
         if (clearTask != null) clearTask.stop();
-        if (mergeTask != null) mergeTask.stop(); // Dừng task gộp
+        if (mergeTask != null) mergeTask.stop();
         if (storageManager != null) storageManager.saveAll();
         getLogger().info("🛑 ClearLagStorage đã tắt, dữ liệu đã lưu.");
     }
 
-    // Getters
     public ConfigManager getConfigManager() { return configManager; }
     public ItemStorageManager getStorageManager() { return storageManager; }
     public ClearTask getClearTask() { return clearTask; }
-    public MergeTask getMergeTask() { return mergeTask; } // Thêm getter cho MergeTask
+    public MergeTask getMergeTask() { return mergeTask; }
 }
