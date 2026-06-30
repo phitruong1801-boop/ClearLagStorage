@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.UUID;
 
 public class ClearLagCommand implements CommandExecutor, TabCompleter {
-
     private final ClearLagStorage plugin;
     private final StorageGuiListener guiListener;
 
@@ -32,7 +31,6 @@ public class ClearLagCommand implements CommandExecutor, TabCompleter {
             sendUsage(sender);
             return true;
         }
-
         switch (args[0].toLowerCase()) {
             case "now" -> handleNow(sender);
             case "storage" -> handleStorage(sender, args);
@@ -49,23 +47,20 @@ public class ClearLagCommand implements CommandExecutor, TabCompleter {
             return;
         }
         int cleared = plugin.getClearTask().runClear();
-        sender.sendMessage(plugin.getConfigManager().getMessage("cleared-now")
-                .replace("{count}", String.valueOf(cleared)));
+        sender.sendMessage(plugin.getConfigManager().getMessage("cleared-now").replace("{count}", String.valueOf(cleared)));
     }
 
     private void handleStorage(CommandSender sender, String[] args) {
         if (!(sender instanceof Player viewer)) {
-            sender.sendMessage("Lệnh này chỉ dùng được trong game.");
+            sender.sendMessage("Lệnh này chỉ dùng trong game.");
             return;
         }
         if (!sender.hasPermission("clearlagstorage.use")) {
             sender.sendMessage(plugin.getConfigManager().getMessage("no-permission"));
             return;
         }
-
         UUID targetId;
         String titleOverride = null;
-
         if (args.length >= 2) {
             if (!sender.hasPermission("clearlagstorage.admin")) {
                 sender.sendMessage(plugin.getConfigManager().getMessage("no-permission"));
@@ -81,13 +76,12 @@ public class ClearLagCommand implements CommandExecutor, TabCompleter {
         } else {
             targetId = viewer.getUniqueId();
         }
-
         openStorageGui(viewer, targetId, false, titleOverride);
     }
 
     private void handleUnclaimed(CommandSender sender) {
         if (!(sender instanceof Player viewer)) {
-            sender.sendMessage("Lệnh này chỉ dùng được trong game.");
+            sender.sendMessage("Lệnh này chỉ dùng trong game.");
             return;
         }
         if (!sender.hasPermission("clearlagstorage.admin")) {
@@ -110,15 +104,15 @@ public class ClearLagCommand implements CommandExecutor, TabCompleter {
         }
         plugin.getConfigManager().reload();
         plugin.getClearTask().restart();
-        plugin.getMergeTask().restart(); // ✅ Tải lại cả task gộp item
+        plugin.getMergeTask().restart();
         sender.sendMessage(plugin.getConfigManager().getMessage("reloaded"));
     }
 
     private void sendUsage(CommandSender sender) {
-        sender.sendMessage("§7/clearlag now §f- Dọn item rơi ngay (admin)");
-        sender.sendMessage("§7/clearlag storage [player] §f- Mở kho item đã dọn");
-        sender.sendMessage("§7/clearlag unclaimed §f- Mở kho item không rõ chủ (admin)");
-        sender.sendMessage("§7/clearlag reload §f- Tải lại config + khởi động lại task (admin)");
+        sender.sendMessage("§7/clearlag now §f- Dọn item ngay (admin)");
+        sender.sendMessage("§7/clearlag storage [người chơi] §f- Mở kho item");
+        sender.sendMessage("§7/clearlag unclaimed §f- Kho item không chủ (admin)");
+        sender.sendMessage("§7/clearlag reload §f- Tải lại config & task (admin)");
     }
 
     @Override
@@ -130,9 +124,7 @@ public class ClearLagCommand implements CommandExecutor, TabCompleter {
             options.add("unclaimed");
             options.add("reload");
         } else if (args.length == 2 && args[0].equalsIgnoreCase("storage")) {
-            for (Player p : Bukkit.getOnlinePlayers()) {
-                options.add(p.getName());
-            }
+            for (Player p : Bukkit.getOnlinePlayers()) options.add(p.getName());
         }
         return options;
     }
