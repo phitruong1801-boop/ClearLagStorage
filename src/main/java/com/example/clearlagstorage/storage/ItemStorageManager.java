@@ -37,7 +37,7 @@ public class ItemStorageManager {
         List<Long> times = timestamps.computeIfAbsent(key, k -> new ArrayList<>());
         ItemStack toAdd = item.clone();
 
-        // GỘP ITEM GIỐNG NHAU: cùng loại + cùng thuộc tính, còn chỗ trống
+        // Gộp item giống nhau - thay addAmount/subtractAmount bằng setAmount
         for (int i = 0; i < list.size() && toAdd.getAmount() > 0; i++) {
             ItemStack existing = list.get(i);
             if (existing.isSimilar(toAdd)) {
@@ -45,19 +45,17 @@ public class ItemStorageManager {
                 int space = maxStack - existing.getAmount();
                 if (space > 0) {
                     int add = Math.min(space, toAdd.getAmount());
-                    existing.addAmount(add);
-                    toAdd.subtractAmount(add);
+                    existing.setAmount(existing.getAmount() + add);
+                    toAdd.setAmount(toAdd.getAmount() - add);
                 }
             }
         }
 
-        // Nếu còn lại sau khi gộp → thêm stack mới
         if (toAdd.getAmount() > 0) {
             list.add(toAdd);
             times.add(System.currentTimeMillis());
         }
 
-        // Giới hạn số stack tối đa
         int max = key.equals(UNCLAIMED_ID)
                 ? plugin.getConfigManager().getMaxStacksUnclaimed()
                 : plugin.getConfigManager().getMaxStacksPerPlayer();
