@@ -49,6 +49,7 @@ public class ClearTask {
             String msg = plugin.getConfigManager().getMessage("warning")
                     .replace("{seconds}", String.valueOf(secondsRemaining));
             Bukkit.broadcastMessage(msg);
+            playSoundToAll(org.bukkit.Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 1.0f);
         }
 
         if (secondsRemaining <= 0) {
@@ -57,6 +58,7 @@ public class ClearTask {
                     .replace("{count}", String.valueOf(cleared));
             if (cleared > 0) {
                 Bukkit.broadcastMessage(msg);
+                playSoundToAll(org.bukkit.Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
             }
             secondsRemaining = plugin.getConfigManager().getIntervalSeconds();
             return;
@@ -96,6 +98,12 @@ public class ClearTask {
         return count;
     }
 
+    private void playSoundToAll(org.bukkit.Sound sound, float volume, float pitch) {
+        for (org.bukkit.entity.Player player : Bukkit.getOnlinePlayers()) {
+            player.playSound(player.getLocation(), sound, volume, pitch);
+        }
+    }
+
     private UUID resolveOwner(Item itemEntity) {
         if (itemEntity.getOwner() != null) {
             return itemEntity.getOwner();
@@ -109,4 +117,4 @@ public class ClearTask {
     public int getSecondsRemaining() {
         return secondsRemaining;
     }
-          }
+    }
