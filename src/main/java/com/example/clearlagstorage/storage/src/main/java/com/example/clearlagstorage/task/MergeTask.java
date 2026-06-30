@@ -2,7 +2,6 @@ package com.example.clearlagstorage.task;
 
 import com.example.clearlagstorage.ClearLagStorage;
 import org.bukkit.World;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
@@ -11,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MergeTask {
-
     private final ClearLagStorage plugin;
     private BukkitTask mergeTask;
 
@@ -22,7 +20,6 @@ public class MergeTask {
     public void start() {
         stop();
         if (!plugin.getConfigManager().isMergeEnabled()) return;
-
         int interval = plugin.getConfigManager().getMergeInterval();
         this.mergeTask = plugin.getServer().getScheduler().runTaskTimer(
                 plugin, this::mergeAllWorlds, 20L, interval * 20L
