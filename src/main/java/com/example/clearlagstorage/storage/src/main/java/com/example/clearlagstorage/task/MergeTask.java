@@ -62,7 +62,8 @@ public class MergeTask {
                         if (space <= 0) break;
 
                         int add = Math.min(space, other.getItemStack().getAmount());
-                        mainStack.addAmount(add);
+                        // Thay addAmount bằng setAmount
+                        mainStack.setAmount(mainStack.getAmount() + add);
                         main.setItemStack(mainStack);
                         other.remove();
                     }
