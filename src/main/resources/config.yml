@@ -1,9 +1,18 @@
+# =========================================================
+#  ClearLagStorage - config.yml
+# =========================================================
+
 clear-task:
   enabled: true
   interval-seconds: 300
   warning-seconds: [60, 30, 10, 5]
   worlds: []
   ignore-custom-named-items: false
+
+merge-task:
+  enabled: true
+  interval-seconds: 5
+  radius: 2.5
 
 storage:
   max-stacks-per-player: 200
