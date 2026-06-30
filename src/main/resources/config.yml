@@ -1,0 +1,22 @@
+clear-task:
+  enabled: true
+  interval-seconds: 300
+  warning-seconds: [60, 30, 10, 5]
+  worlds: []
+  ignore-custom-named-items: false
+
+storage:
+  max-stacks-per-player: 200
+  max-stacks-unclaimed: 500
+  auto-purge-days: 7
+
+messages:
+  prefix: "&8[&cClearLag&8] &7"
+  warning: "&eServer sẽ dọn item rơi trong &c{seconds}&e giây nữa!"
+  cleared-broadcast: "&aĐã dọn &f{count}&a vật phẩm rơi. Dùng &f/clearlag storage&a để xem và lấy lại."
+  storage-title: "&8Kho item đã dọn"
+  unclaimed-title: "&8Kho item không rõ chủ"
+  no-permission: "&cBạn không có quyền sử dụng lệnh này."
+  reloaded: "&aĐã tải lại config.yml."
+  storage-empty: "&7Kho của bạn hiện không có vật phẩm nào."
+  cleared-now: "&aĐã dọn ngay &f{count}&a vật phẩm rơi."
